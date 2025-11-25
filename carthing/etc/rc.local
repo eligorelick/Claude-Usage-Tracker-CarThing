@@ -1,0 +1,10 @@
+#!/bin/sh
+# Boot script - runs before services start
+# Remount filesystem read-write (required for services)
+mount -o remount,rw /
+
+# Wait for USB network to come up
+sleep 10
+
+# Sync time from NTP (Car Thing has no battery-backed clock)
+ntpd -n -q -p pool.ntp.org &
